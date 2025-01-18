@@ -1,19 +1,22 @@
-import React, {lazy, Suspense} from 'react';
+import React, { lazy, Suspense } from "react";
 import Header from "./Header";
-import './App.css';
+import "./App.scss";
 import Footer from "./Footer";
 
-const MainApp = lazy(() => import("MainApp/App"))
+const MainApp = lazy(() => import("MainApp/App"));
+const AsideApp = lazy(() => import("AsideApp/App"));
 
 function App() {
   return (
-    <div className="app">
+    <div className="home">
       <Header />
       <div className="contMain">
-        <MainApp />
-        <div className='aside'>
-          aside
-        </div>
+        <Suspense fallback={<div>Loading..</div>}>
+          <MainApp />
+        </Suspense>
+        <Suspense fallback={<div>Loading..</div>}>
+          <AsideApp />
+        </Suspense>
       </div>
       <Footer />
     </div>

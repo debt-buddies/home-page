@@ -26,7 +26,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.css$/i,
+        test: /\.scss$/i,
         use: ["style-loader", "css-loader"],
       },
     ],
@@ -40,7 +40,8 @@ module.exports = {
         "./Header": "./src/Header.jsx", 
       },
       remotes: {
-        MainApp: "PdpApp@http://localhost:3001/remoteEntry.js"
+        MainApp: "PdpApp@http://localhost:3001/remoteEntry.js",
+        AsideApp: "AsideApp@http://localhost:3002/remoteEntry.js"
       },
       shared: {
         ...dependencies,
