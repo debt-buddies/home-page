@@ -1,4 +1,3 @@
-// home-page/webpack.config.js
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 // import ModuleFederationPlugin from webpack
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
