@@ -40,6 +40,9 @@ module.exports = (env, argv) => {
         filename: "remoteEntry.js",
         exposes: {
           "./Header": "./src/Header.jsx", 
+          "./hooks/useStore": "./src/hooks/useStore.js",
+          "./hooks/useStoreSelector": "./src/hooks/useStoreSelector.js",
+          "./providers/StoreProvider": "./src/providers/StoreProvider.jsx",
         },
         remotes: {
           MainApp: "PdpApp@http://localhost:3001/remoteEntry.js",

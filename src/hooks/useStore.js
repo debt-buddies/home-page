@@ -2,18 +2,23 @@ import { useStoreDispatch } from "./useStoreDispatch";
 import {
   addTodo,
   changePreviewContent,
+  getData
 } from "../redux/features/todos/todosSlice";
 
 export default function useStore() {
   const dispatch = useStoreDispatch();
 
-  const addTodos = () => {
-    dispatch(addTodo());
+  const addTodos = (todo) => {
+    dispatch(addTodo(todo));
   };
 
-  const changePreview = () => {
-    dispatch(changePreviewContent());
+  const changePreview = (typePreview) => {
+    dispatch(changePreviewContent(typePreview));
   };
 
-  return { addTodos, changePreview };
+  const getDataDetail = (detail) => {
+    dispatch(getData(detail));
+  }
+
+  return { addTodos, changePreview, getDataDetail };
 }
