@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   listTodos: [],
+  previewContent: 'LIST_TODOS'
 };
 
 export const todoSlice = createSlice({
@@ -12,9 +13,12 @@ export const todoSlice = createSlice({
       const { listTodos } = state;
       state.listTodos = [...listTodos, action.payload];
     },
+    changePreviewContent: (state, action) => {
+        state.previewContent = action.payload
+    }
   },
 });
 
-export const { addTodo } = todoSlice.actions;
+export const { addTodo, changePreviewContent } = todoSlice.actions;
 
 export default todoSlice.reducer;

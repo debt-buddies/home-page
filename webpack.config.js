@@ -4,60 +4,63 @@ const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPl
 // import dependencies from package.json, which includes react and react-dom
 const { dependencies } = require("./package.json");
 
-module.exports = {
-  entry: "./src/entry.js",
-  mode: "development",
-  devServer: {
-    port: 3000,
-  },
-  module: {
-    rules: [
-      {
-        test: /\.(js|jsx)?$/,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: "babel-loader",
-            options: {
-              presets: ["@babel/preset-env", "@babel/preset-react"],
+module.exports = (env, argv) => {
+  console.log({env, argv})
+
+  return {
+    entry: "./src/entry.js",
+    mode: "development",
+    devServer: {
+      port: 3000,
+    },
+    module: {
+      rules: [
+        {
+          test: /\.(js|jsx)?$/,
+          exclude: /node_modules/,
+          use: [
+            {
+              loader: "babel-loader",
+              options: {
+                presets: ["@babel/preset-env", "@babel/preset-react"],
+              },
             },
+          ],
+        },
+        {
+          test: /\.scss$/i,
+          use: ["style-loader", "css-loader"],
+        },
+      ],
+    },
+    plugins: [
+      //...
+      new ModuleFederationPlugin({
+        name: "HomeApp",
+        filename: "remoteEntry.js",
+        exposes: {
+          "./Header": "./src/Header.jsx", 
+        },
+        remotes: {
+          MainApp: "PdpApp@http://localhost:3001/remoteEntry.js",
+          AsideApp: "AsideApp@http://localhost:3002/remoteEntry.js"
+        },
+        shared: {
+          ...dependencies,
+          react: {
+            singleton: true,
+            requiredVersion: dependencies["react"],
           },
-        ],
-      },
-      {
-        test: /\.scss$/i,
-        use: ["style-loader", "css-loader"],
-      },
+          "react-dom": {
+            singleton: true,
+            requiredVersion: dependencies["react-dom"],
+          },
+        },
+      }),
     ],
-  },
-  plugins: [
-    //...
-    new ModuleFederationPlugin({
-      name: "HomeApp",
-      filename: "remoteEntry.js",
-      exposes: {
-        "./Header": "./src/Header.jsx", 
-      },
-      remotes: {
-        MainApp: "PdpApp@http://localhost:3001/remoteEntry.js",
-        AsideApp: "AsideApp@http://localhost:3002/remoteEntry.js"
-      },
-      shared: {
-        ...dependencies,
-        react: {
-          singleton: true,
-          requiredVersion: dependencies["react"],
-        },
-        "react-dom": {
-          // react-dom
-          singleton: true,
-          requiredVersion: dependencies["react-dom"],
-        },
-      },
-    }),
-  ],
-  resolve: {
-    extensions: [".js", ".jsx"],
-  },
-  target: "web",
-};
+    resolve: {
+      extensions: [".js", ".jsx"],
+    },
+    target: "web",
+  };
+}
