@@ -9,7 +9,7 @@ const AsideApp = lazy(() => import("AsideApp/App"));
 function App() {
   return (
     <div className="home">
-      <Header />
+      <Header withBtn />
       <div className="contMain">
         <Suspense fallback={<div>Loading..</div>}>
           <MainApp />
