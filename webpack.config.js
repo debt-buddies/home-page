@@ -5,7 +5,7 @@ const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPl
 const { dependencies } = require("./package.json");
 
 module.exports = (env, argv) => {
-  console.log({env, argv})
+  console.log({ env, argv });
 
   return {
     entry: "./src/entry.js",
@@ -39,14 +39,15 @@ module.exports = (env, argv) => {
         name: "HomeApp",
         filename: "remoteEntry.js",
         exposes: {
-          "./Header": "./src/Header.jsx", 
+          "./Header": "./src/Header.jsx",
           "./hooks/useStore": "./src/hooks/useStore.js",
           "./hooks/useStoreSelector": "./src/hooks/useStoreSelector.js",
           "./providers/StoreProvider": "./src/providers/StoreProvider.jsx",
         },
         remotes: {
           MainApp: "PdpApp@http://localhost:3001/remoteEntry.js",
-          AsideApp: "AsideApp@http://localhost:3002/remoteEntry.js"
+          AsideApp: "AsideApp@http://localhost:3002/remoteEntry.js",
+          OnepackApp: "OnepackApp@http://localhost:3003/remoteEntry.js",
         },
         shared: {
           ...dependencies,
@@ -66,4 +67,4 @@ module.exports = (env, argv) => {
     },
     target: "web",
   };
-}
+};
