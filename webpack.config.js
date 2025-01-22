@@ -1,9 +1,9 @@
+const path = require('path');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 // import ModuleFederationPlugin from webpack
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 // import dependencies from package.json, which includes react and react-dom
 const { dependencies } = require("./package.json");
-
 module.exports = (env, argv) => {
   console.log({ env, argv });
 
@@ -63,6 +63,9 @@ module.exports = (env, argv) => {
       }),
     ],
     resolve: {
+      alias: {
+        '@features': path.resolve(__dirname, 'src/redux/features')
+      },
       extensions: [".js", ".jsx"],
     },
     target: "web",

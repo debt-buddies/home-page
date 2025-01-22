@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+      "module": "commonjs",
+      "target": "es6",
+      "baseUrl": ".",
+      "jsx": "react",
+      "paths": {
+        "@features/*": ["./src/redux/features/*"],
+      },
+      "allowSyntheticDefaultImports": true
+    },
+    "exclude": ["node_modules", "build"]
+  }

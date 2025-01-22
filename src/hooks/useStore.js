@@ -3,7 +3,7 @@ import {
   addTodo,
   changePreviewContent,
   getData
-} from "../redux/features/todos/todosSlice";
+} from "@features/todos/todosSlice";
 
 export default function useStore() {
   const dispatch = useStoreDispatch();
