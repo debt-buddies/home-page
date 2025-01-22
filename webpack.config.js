@@ -5,8 +5,6 @@ const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPl
 // import dependencies from package.json, which includes react and react-dom
 const { dependencies } = require("./package.json");
 module.exports = (env, argv) => {
-  console.log({ env, argv });
-
   return {
     entry: "./src/entry.js",
     mode: "development",
